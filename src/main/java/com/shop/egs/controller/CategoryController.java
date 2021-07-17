@@ -1,12 +1,14 @@
 package com.shop.egs.controller;
 
+import com.shop.egs.dto.CategoryDto;
+import com.shop.egs.dto.ProductDto;
+import com.shop.egs.model.Category;
 import com.shop.egs.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(CategoryController.ROUTE)
@@ -19,12 +21,12 @@ public class CategoryController {
         this.service = service;
     }
 
-    @GetMapping(value = "/add")
-    public ResponseEntity<Object> sayHello(@RequestParam(name = "categoryname") String name) throws Exception {
-        return new ResponseEntity<>(service.saveCategory(name).getName(), HttpStatus.OK);
+    @PostMapping(value = "/save")
+    public ResponseEntity<Object> sayHello(@RequestBody CategoryDto dto) throws Exception {
+        return new ResponseEntity<>(service.saveCategory(dto.getCategoryName()).getName(), HttpStatus.OK);
     }
     @GetMapping(value = "/getall")
-    public ResponseEntity<Object> getAllProducts(){
+    public ResponseEntity<Object>getAllProducts(){
         return new ResponseEntity<>(service.getAllCategories(), HttpStatus.OK);
     }
 }

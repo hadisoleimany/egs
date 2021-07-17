@@ -1,6 +1,5 @@
 package com.shop.egs.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.egs.enums.RoleType;
 import com.shop.egs.model.User;
 import lombok.AllArgsConstructor;

@@ -1,11 +1,17 @@
 package com.shop.egs.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Product")
+@Data
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +20,7 @@ public class Product {
     private BigDecimal price;
     private String description;
     @OneToMany( mappedBy = "product")
-    private Set<Comment> comments;
+    private List<Comment> comments;
     @ManyToOne
     private Category category;
 }

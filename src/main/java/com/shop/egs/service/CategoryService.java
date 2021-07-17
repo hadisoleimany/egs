@@ -1,12 +1,12 @@
 package com.shop.egs.service;
 
+import com.shop.egs.BusinessException;
+import com.shop.egs.dto.CategoryDto;
 import com.shop.egs.model.Category;
 import com.shop.egs.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -18,20 +18,27 @@ public class CategoryService {
     }
 
     public Category saveCategory(String name) throws Exception {
-        if(checkExist(name).isPresent()){
-            throw new Exception("The Name Already Exist");
-        }
+        checkExist(name);
         return rp.save(new Category(name));
     }
     public void deleteCategory(Category category){
         rp.delete(category);
     }
-    public Set<Category> getAllCategories(){
-        Set<Category> categories=new HashSet<>();
-        rp.findAll().forEach(categories::add);
+    public List<CategoryDto> getAllCategories(){
+        List<CategoryDto> categories=new ArrayList<>();
+        rp.findAll().forEach(c->categories.add(new CategoryDto(c.getName())));
         return categories;
     }
-    public Optional<Category> checkExist(String name){
-        return rp.findByName(name);
+    private void checkExist(String name) {
+        if(getCategoryByName(name)!=null){
+            throw new BusinessException("The Name Already Exist");
+        }
+    }
+    public Category getCategoryByName(String name){
+        Optional<Category> category = rp.findByName(name);
+        if(category.isEmpty()){
+            throw new BusinessException("Category Not Found");
+        }
+        return category.get();
     }
 }

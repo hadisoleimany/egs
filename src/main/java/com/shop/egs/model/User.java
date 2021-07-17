@@ -33,6 +33,10 @@ public class User {
         this.role = dto.getRole();
     }
 
+    public User(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
