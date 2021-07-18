@@ -1,0 +1,493 @@
+{
+	"variables": [],
+	"info": {
+		"name": "EGS",
+		"_postman_id": "13410ffd-b0cd-144b-20c9-6b16295ad86b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SaveCategory",
+			"request": {
+				"url": "http://localhost:8080/api/category/save",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiaGFkaSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjI2NjQxMzU4LCJleHAiOjE2MjY2NDE5NTh9.Udg1vhDaoqYi82w3FOdF0EbXvjwQ1y5bJlZNTJXpKyPeFr6GqpEKShwCWp6fP4z47Q4Q43l8tSP_gOTolZn6iA",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"categoryName\": \"Electronical\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SignUp",
+			"request": {
+				"url": "http://localhost:8080/api/user/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"ali\",\n\t\"family\":\"soleimany\",\n\t\"code\":\"100\",\n\t\"userName\":\"ali\",\n\t\"password\":\"5699\",\n\t\"role\":\"USER\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddProduct",
+			"request": {
+				"url": "http://localhost:8080/api/product/save",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"categoryDto\":{\"categoryName\":\"ali\"},\n\t\"productName\":\"car\",\n\t\"price\":500,\n\t\"description\":\"offroad\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddComment",
+			"request": {
+				"url": "http://localhost:8080/api/comment/save",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\":\"kheilikhob nabood\",\n\t\"rate\":\"GOOD\",\n\t\"user\":{\n\t\t\"name\":\"hadi\",\n\t\t\"family\":\"soleimany\",\n\t\t\"code\":\"110\",\n\t\t\"userName\":\"hadi\",\n\t\t\"password\":\"1234\",\n\t\t\"role\":\"ADMIN\"\n\t\t},\n\t\t\"product\":{\n\t\t\"categoryDto\":{\"categoryName\":\"ali\"},\n\t\t\"productName\":\"car\",\n\t\t\"price\":500,\n\t\t\"description\":\"offroad\"\n\t\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "EditProduct",
+			"request": {
+				"url": "http://localhost:8080/api/product/edit",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"categoryDto\":{\"categoryName\":\"hadi\"},\n\t\"productName\":\"loptop\",\n\t\"price\":110,\n\t\"description\":\"kheiliiiiii darad\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"request": {
+				"url": "http://localhost:8080/api/product/delete",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"categoryDto\":{\"categoryName\":\"hadi\"},\n\t\"productName\":\"loptop\",\n\t\"price\":110,\n\t\"description\":\"kheiliiiiii darad\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn",
+			"request": {
+				"url": "http://localhost:8080/api/user/signin",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userName\":\"hadi\",\n\t\"password\":\"1234\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SignOut",
+			"request": {
+				"url": "http://localhost:8080/api/user/signout",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userName\":\"hadi\",\n\t\"password\":\"1234\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserInfo",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/user/getuser?username=ali",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "ali",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiaGFkaSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjI2NjM4MzUyLCJleHAiOjE2MjY2Mzg5NTJ9.UEWVMbF0hgNdOWXPa7iurTq6ROuIPq2ayoUSRgDImPb7rCkjWAtboswUmX5AwZOvm7f7UYJ7fsQkHWTCdL5HlQ",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userName\":\"hadi\",\n\t\"password\":\"1234\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "BlockUser",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/user/block?username=ali",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"block"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "ali",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiaGFkaSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjI2NjM5NDI5LCJleHAiOjE2MjY2NDAwMjl9.0UV9yLrxnRnRSOlEoE1wrcst9R_422mPoZroCPGwNu6eGLsvUkpH2VF0VVmb4VWQtRmaWYu8k_JGmEdFtEcRYg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userName\":\"hadi\",\n\t\"password\":\"1234\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "unBlockUser",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/user/unblock?username=ali",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"unblock"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "ali",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiaGFkaSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjI2NjQxMDExLCJleHAiOjE2MjY2NDE2MTF9.PVTCLmWKPppsHONUp7xk7u2lTZ3yaJn15APLeVJHcXeceyP5P1LinwrD1hM46aVnTUKGFbY0o-C6JbvV1rzc5Q",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userName\":\"hadi\",\n\t\"password\":\"1234\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCategory",
+			"request": {
+				"url": "http://localhost:8080/api/category/getall",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiaGFkaSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2MjY2MzQzNjQsImV4cCI6MTYyNjYzNDk2NH0.d7Lbq-oUc--uEeKWC1P7DMcuZJMQtZPPrz9cCIHKp_BG9WgFJJbOuMk_KJHwjEf63iyyFzwHnWuI_iB1Mbdngw",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllProduct",
+			"request": {
+				"url": "http://localhost:8080/api/product/getall",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllProductBy Price Range",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/product/getallbyprice?min=69&max=50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product",
+						"getallbyprice"
+					],
+					"query": [
+						{
+							"key": "min",
+							"value": "69",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "max",
+							"value": "50",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiaGFkaSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjI2NjQzMjY1LCJleHAiOjE2MjY2NDM4NjV9.e_eO0l1Qd6t01Ac5CUejAuYTxa9bScM4jbxQwaPjsQstXkfbQ1HmFQ3cTSn9u1NMxhrUDOp7ZNIAFwwEuaGlcw",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllProductByCategory",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/product/getallbycategory?categoryname=hadi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product",
+						"getallbycategory"
+					],
+					"query": [
+						{
+							"key": "categoryname",
+							"value": "hadi",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllProductLikeProductName",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/product/getallbyname?productname=cell",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product",
+						"getallbyname"
+					],
+					"query": [
+						{
+							"key": "productname",
+							"value": "cell",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCommentByProductName",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/comment/getallcommentbyproductname?productname=car",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"comment",
+						"getallcommentbyproductname"
+					],
+					"query": [
+						{
+							"key": "productname",
+							"value": "car",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
