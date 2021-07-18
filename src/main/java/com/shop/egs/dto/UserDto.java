@@ -17,6 +17,7 @@ public class UserDto {
         this.code = user.getCode();
         this.userName = user.getUserName();
         this.role = user.getRole();
+        this.block=user.isBlock();
     }
 
     private String name;
@@ -25,5 +26,6 @@ public class UserDto {
     private String userName;
     private String password;
     private RoleType role;
+    private boolean block;
 
 }

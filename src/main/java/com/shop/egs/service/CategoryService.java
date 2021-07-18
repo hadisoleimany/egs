@@ -1,6 +1,7 @@
 package com.shop.egs.service;
 
-import com.shop.egs.BusinessException;
+import com.shop.egs.aop.AccessibleUser;
+import com.shop.egs.exception.BusinessException;
 import com.shop.egs.dto.CategoryDto;
 import com.shop.egs.model.Category;
 import com.shop.egs.repository.CategoryRepository;
@@ -17,10 +18,12 @@ public class CategoryService {
         this.rp = rp;
     }
 
-    public Category saveCategory(String name) throws Exception {
+    @AccessibleUser
+    public Category saveCategory(String name){
         checkExist(name);
         return rp.save(new Category(name));
     }
+    @AccessibleUser
     public void deleteCategory(Category category){
         rp.delete(category);
     }
@@ -30,7 +33,7 @@ public class CategoryService {
         return categories;
     }
     private void checkExist(String name) {
-        if(getCategoryByName(name)!=null){
+        if( rp.findByName(name).isPresent()){
             throw new BusinessException("The Name Already Exist");
         }
     }

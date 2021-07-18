@@ -1,18 +1,23 @@
 package com.shop.egs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.egs.dto.UserDto;
 import com.shop.egs.enums.RoleType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class User {
+public class User  {
 
 
     public User(String name, String family, String code, String userName, String password, RoleType role) {
@@ -44,7 +49,7 @@ public class User {
     private String name;
     private String family;
     private String code;
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String userName;
     @Column(nullable = false)
     private String password;

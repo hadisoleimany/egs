@@ -22,7 +22,7 @@ public class CategoryController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Object> sayHello(@RequestBody CategoryDto dto) throws Exception {
+    public ResponseEntity<Object> saveCategory(@RequestBody CategoryDto dto) {
         return new ResponseEntity<>(service.saveCategory(dto.getCategoryName()).getName(), HttpStatus.OK);
     }
     @GetMapping(value = "/getall")

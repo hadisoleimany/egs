@@ -1,6 +1,7 @@
 package com.shop.egs.service;
 
-import com.shop.egs.BusinessException;
+import com.shop.egs.aop.AccessibleUser;
+import com.shop.egs.exception.BusinessException;
 import com.shop.egs.dto.CategoryDto;
 import com.shop.egs.dto.ProductDto;
 import com.shop.egs.model.Category;
@@ -8,6 +9,7 @@ import com.shop.egs.model.Product;
 import com.shop.egs.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,13 +27,15 @@ public class ProductService {
     }
 
     //validations for insert
-    public ProductDto saveProduct(ProductDto dto) throws Exception {
+    @AccessibleUser
+    public ProductDto saveProduct(ProductDto dto) {
         Product product = rp.save(convertToProduct(dto));
         return convertToProductDto(product);
     }
 
     //validations for delete
-    public void deleteProduct(ProductDto dto) throws Exception {
+    @AccessibleUser
+    public void deleteProduct(ProductDto dto) {
         Product product = checkExist(dto);
         rp.delete(product);
     }
@@ -43,7 +47,8 @@ public class ProductService {
     }
 
     //validations for update
-    public ProductDto update(ProductDto dto) throws Exception {
+    @AccessibleUser
+    public ProductDto update(ProductDto dto) {
         Product product = checkExist(dto);
         product.setPrice(dto.getPrice());
         product.setDescription(dto.getDescription());
@@ -51,11 +56,44 @@ public class ProductService {
 
     }
 
+    public List<ProductDto> findByCategory(String categoryName) {
+        Category category = categoryService.getCategoryByName(categoryName);
+        return convertToListProductDto(rp.findAllByCategory(category));
+
+    }
+
+    public List<ProductDto> findAllByProductName(String productName) {
+        return convertToListProductDto(rp.findAllByProductNameContains(productName));
+    }
+
+    /*
+        search for products per product name
+     */
+    public Product findByProductName(String productName) {
+        ProductDto dto = new ProductDto();
+        dto.setProductName(productName);
+        return checkExist(dto);
+    }
+
+    /*
+        search for products  per price range
+     */
+    public List<ProductDto> findByPriceRange(BigDecimal min, BigDecimal max) {
+        validationPriceRange(min, max);
+        return convertToListProductDto(rp.findAllByPriceBetween(min, max));
+    }
+
+    private void validationPriceRange(BigDecimal min, BigDecimal max) {
+        if ((min.equals(new BigDecimal(0)) && max.equals(new BigDecimal(0))) || ((max.compareTo(min) < 0 ))) {
+            throw new BusinessException("Wrong Parameter");
+        }
+    }
+
     private Product checkExist(ProductDto dto) {
         Optional<Product> product = rp.findByProductName(dto.getProductName());
 
         if (product.isEmpty()) {
-            throw new BusinessException(dto.getProductName()+" Product NotFound !!!");
+            throw new BusinessException(dto.getProductName() + " Product NotFound !!!");
         }
         return product.get();
     }
@@ -76,26 +114,11 @@ public class ProductService {
                 product.getProductName(), product.getPrice(), product.getDescription());
     }
 
-    public List<ProductDto> findByCategory(String categoryName) {
-        Category category = categoryService.getCategoryByName(categoryName);
-        return convertToListProductDto(rp.findAllByCategory(category));
-
-    }
-
     private List<ProductDto> convertToListProductDto(List<Product> productList) {
-        if(productList==null || productList.size()==0){
+        if (productList == null || productList.size() == 0) {
             return new ArrayList<>();
         }
         return productList.stream().map(c -> new ProductDto(new CategoryDto(c.getCategory().getName()),
                 c.getProductName(), c.getPrice(), c.getDescription())).collect(Collectors.toList());
-    }
-
-    public List<ProductDto>  findAllByProductName(String productName) {
-        return convertToListProductDto(rp.findAllByProductNameContains(productName));
-    }
-    public Product findByProductName(String productName){
-        ProductDto dto = new ProductDto();
-        dto.setProductName(productName);
-        return checkExist(dto);
     }
 }

@@ -16,7 +16,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false,unique = true)
     private String productName;
+    @Column(nullable = false)
     private BigDecimal price;
     private String description;
     @OneToMany( mappedBy = "product")

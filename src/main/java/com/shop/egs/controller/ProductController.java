@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,15 +23,15 @@ public class ProductController {
         return  service.getAll();
     }
     @PostMapping("/save")
-    public ProductDto save(@RequestBody ProductDto dto) throws Exception {
+    public ProductDto save(@RequestBody ProductDto dto){
         return service.saveProduct(dto);
     }
     @PostMapping("/edit")
-    public ProductDto update(@RequestBody ProductDto dto) throws Exception {
+    public ProductDto update(@RequestBody ProductDto dto) {
         return service.update(dto);
     }
     @PostMapping("/delete")
-    public void delete(@RequestBody ProductDto dto) throws Exception {
+    public void delete(@RequestBody ProductDto dto) {
         service.deleteProduct(dto);
     }
     @GetMapping("/getallbycategory")
@@ -40,5 +41,9 @@ public class ProductController {
     @GetMapping("/getallbyname")
     public ResponseEntity<Object> getAllProductByName(@RequestParam(name = "productname")String productName){
         return new ResponseEntity<>(service.findAllByProductName(productName), HttpStatus.OK);
+    }
+    @GetMapping("/getallbyprice")
+    public ResponseEntity<Object> findByPriceRange(@RequestParam(name = "min")Long min,@RequestParam(name = "max")Long max){
+        return new ResponseEntity<>(service.findByPriceRange(new BigDecimal(min),new BigDecimal(max)), HttpStatus.OK);
     }
 }
