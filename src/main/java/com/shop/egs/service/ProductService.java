@@ -29,6 +29,7 @@ public class ProductService {
     //validations for insert
     @AccessibleUser
     public ProductDto saveProduct(ProductDto dto) {
+        validationProduct(dto);
         Product product = rp.save(convertToProduct(dto));
         return convertToProductDto(product);
     }
@@ -120,5 +121,20 @@ public class ProductService {
         }
         return productList.stream().map(c -> new ProductDto(new CategoryDto(c.getCategory().getName()),
                 c.getProductName(), c.getPrice(), c.getDescription())).collect(Collectors.toList());
+    }
+
+    private void validationProduct(ProductDto dto){
+        if(dto==null){
+            throw new BusinessException("Product Is Null");
+        }
+        if(dto.getCategoryDto()==null){
+            throw new BusinessException("Category Is Null Should Be Selected");
+        }
+        if(dto.getProductName()==null || dto.getPrice()==null){
+            throw new BusinessException("Product Name Or Price  Is Null");
+        }
+        if(rp.findByProductName(dto.getProductName()).isPresent()){
+            throw new BusinessException("Product Already Exist!!");
+        }
     }
 }
